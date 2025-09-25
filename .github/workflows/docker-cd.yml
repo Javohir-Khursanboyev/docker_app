@@ -18,18 +18,15 @@ jobs:
       - name: Docker login
         uses: docker/login-action@v3
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}   # Docker Hub username
-          password: ${{ secrets.DOCKERHUB_TOKEN }}      # Docker Hub access token
+          username: ${{ secrets.DOCKERHUB_USERNAME }}  
+          password: ${{ secrets.DOCKERHUB_TOKEN }}      
 
-      # 3️ Build and push: Docker image build qiladi va Docker Hub’ga push qiladi
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
-          context: .                                  # Build konteksti – repo root
-          file: docker_app1/Dockerfile  # Dockerfile joylashgan yo‘l
-          push: true                                  # Docker Hub’ga push qilish
-          tags: |                                     # Image tag’lari
+          context: .                                
+          file: docker_app1/Dockerfile  
+          push: true                                 
+          tags: |                                    
             ${{ secrets.DOCKERHUB_USERNAME }}/docker_app:latest
             ${{ secrets.DOCKERHUB_USERNAME }}/docker_app:${{ github.sha }}
-            # 'latest' – oxirgi image
-            # '${{ github.sha }}' – har commit uchun alohida tag
