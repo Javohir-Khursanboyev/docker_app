@@ -1,0 +1,18 @@
+﻿services:
+    docker_app:
+       image: javohirkhursanboyev/docker_app
+       container_name: docker_app
+       restart: always
+       # build: 
+       #   context: .
+       #   dockerfile: Dockerfile
+       ports:
+          - "8888:80"
+       environment:
+          - ASPNETCORE_URLS=http://+:80
+       networks:
+          - app-network
+
+networks:
+  app-network:
+    driver: bridge
