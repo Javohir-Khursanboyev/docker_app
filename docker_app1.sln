@@ -5,14 +5,6 @@ VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "docker_app1", "docker_app1\docker_app1.csproj", "{ABEBD48B-1025-428E-873D-4C2D7BDC4D83}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{D728BA07-9880-4F76-A2D0-BD008AA0039F}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{A80E2C10-0DC7-4D06-B4F1-C553585E9872}"
-	ProjectSection(SolutionItems) = preProject
-		docker-cd.yml = docker-cd.yml
-		dotnet-ci.yml = dotnet-ci.yml
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,8 +18,5 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{A80E2C10-0DC7-4D06-B4F1-C553585E9872} = {D728BA07-9880-4F76-A2D0-BD008AA0039F}
 	EndGlobalSection
 EndGlobal
