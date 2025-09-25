@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35527.113 d17.12
+VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "docker_app1", "docker_app1\docker_app1.csproj", "{ABEBD48B-1025-428E-873D-4C2D7BDC4D83}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{FAD832CB-B355-477F-92EC-2E99FB3F132C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
