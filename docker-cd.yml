@@ -1,0 +1,34 @@
+﻿name: Docker CD    # Workflow nomi: Docker image build va push (Continuous Deployment)
+
+# Workflow ishga tushadigan triggerlar
+on:
+  push:                       # Master branch ga push qilinsa
+    branches: [ "master" ]
+  workflow_dispatch:          # Workflow’ni qo‘lda GitHub UI’dan ishga tushirish imkoniyati
+
+jobs:
+  docker:                     # Job nomi: docker
+    runs-on: ubuntu-latest     # Virtual agent: Ubuntu
+
+    steps:
+      # 1️⃣ Checkout: Repo kodini agentga klon qiladi
+      - uses: actions/checkout@v4
+
+      # 2️⃣ Docker login: Docker Hub’ga login qiladi
+      - name: Docker login
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}   # Docker Hub username
+          password: ${{ secrets.DOCKERHUB_TOKEN }}      # Docker Hub access token
+
+      # 3️⃣ Build and push: Docker image build qiladi va Docker Hub’ga push qiladi
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: .                                  # Build konteksti – repo root
+          push: true                                  # Docker Hub’ga push qilish
+          tags: |                                     # Image tag’lari
+            ${{ secrets.DOCKERHUB_USERNAME }}/docker_app:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/docker_app:${{ github.sha }}
+            # 'latest' – oxirgi image
+            # '${{ github.sha }}' – har commit uchun alohida tag
