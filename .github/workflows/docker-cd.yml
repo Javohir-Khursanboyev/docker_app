@@ -26,6 +26,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: .                                  # Build konteksti – repo root
+          file: docker_app1/Dockerfile  # Dockerfile joylashgan yo‘l
           push: true                                  # Docker Hub’ga push qilish
           tags: |                                     # Image tag’lari
             ${{ secrets.DOCKERHUB_USERNAME }}/docker_app:latest
