@@ -1,32 +1,33 @@
-﻿name: Docker CD    # Workflow nomi: Docker image build va push (Continuous Deployment)
+﻿﻿name: CD Pipeline
 
-# Workflow ishga tushadigan triggerlar
 on:
-  push:                       # Master branch ga push qilinsa
-    branches: [ "master" ]
-  workflow_dispatch:          # Workflow’ni qo‘lda GitHub UI’dan ishga tushirish imkoniyati
+  workflow_run:
+    workflows: ["CI Pipeline"]
+    types:
+      - completed
 
 jobs:
-  docker:                     # Job nomi: docker
-    runs-on: ubuntu-latest     # Virtual agent: Ubuntu
+  docker:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
 
     steps:
-      # 1️ Checkout: Repo kodini agentga klon qiladi
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      # 2️ Docker login: Docker Hub’ga login qiladi
       - name: Docker login
         uses: docker/login-action@v3
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}  
-          password: ${{ secrets.DOCKERHUB_TOKEN }}      
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
-          context: .                                
-          file: docker_app1/Dockerfile  
-          push: true                                 
-          tags: |                                    
+          context: .
+          file: docker_app1/Dockerfile
+          push: true
+          pull: true
+          tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/docker_app:latest
             ${{ secrets.DOCKERHUB_USERNAME }}/docker_app:${{ github.sha }}
